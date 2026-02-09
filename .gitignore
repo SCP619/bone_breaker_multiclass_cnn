@@ -38,3 +38,14 @@ npm-debug.log*
 
 # Data
 Dataset/
+
+# Specific files
+# filename.txt
+# config.json
+# secrets.yaml
+
+# Files with specific extensions
+*.pdf
+*.zip
+*.html
+
