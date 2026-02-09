@@ -1,1 +1,39 @@
-Bone Fracture Classification with Custom CNNsProject OverviewThis project implements a deep learning pipeline to classify 10 different types of bone fractures from X-ray images. It explores the design, training, and evaluation of two distinct CNN architectures: a 2-layer model and a 3-layer model. The goal is to compare how increasing model depth affects the classification accuracy of complex medical imaging data.Project Structure1. Data PreparationDataset Management: Implements a custom MyDataset class to handle image loading and label mapping.Preprocessing: Images are resized to $224 \times 224$ pixels and normalized using specific mean and standard deviation values.Splitting: The data is divided into Training, Validation, and Test sets to ensure unbiased performance evaluation.2. Model ArchitectureThe core is a flexible MyCNN class that dynamically builds blocks based on input parameters:Convolutional Layers: Uses $3 \times 3$ kernels with ReLU activation.Pooling: $2 \times 2$ Max Pooling layers reduce spatial dimensions.Regularization: Dropout (0.5) is applied to prevent overfitting.Fully Connected Layer: Dynamically calculates input features based on the number of pooling layers ($56 \times 56$ for 2 layers; $28 \times 28$ for 3 layers).3. Training & Evaluation PipelineEpochs: Both models are trained for 50 epochs.Optimization: Uses the Adam optimizer ($LR=1e-3, Weight Decay=1e-4$) and Cross-Entropy Loss.Best Model Saving: The pipeline tracks validation accuracy and saves the "best" model weights to Assignment1_best_model.pt.Key Tasks & VisualizationsTask 6: Learning CurvesVisualizes training/validation loss and accuracy to monitor convergence.Provides insight into whether the model is overfitting or requires more training time.Task 7: Visual PredictionsDisplays test images with titles showing:GT: Ground Truth label.Pred: Predicted class index.P: Confidence probability (Softmax output).Task 8: Confusion MatrixA statistical breakdown of classification performance across all 10 classes.Identifies which specific fracture types the model confuses (e.g., Spiral vs. Oblique).Comparison: 2-Layer vs. 3-Layer ModelThe project concludes with a comparison of the two architectures:Model 1 (2 Layers): Uses layers_list = [32, 64].Model 2 (3 Layers): Uses layers_list = [16, 32, 64] to extract deeper hierarchical features.How to RunEnvironment: Ensure torch, torchvision, matplotlib, and sklearn are installed.Dataset: Place X-ray images in the directory structure expected by the data_path variable.Execution: Run the notebook cells sequentially. The training loop will automatically handle the 50 epochs and save the best weights.
+# Bone Fracture Classification using Custom CNNs
+
+## 📋 Project Description
+This repository contains a PyTorch implementation for classifying 10 categories of bone fractures. The project evaluates the impact of network depth by comparing two different CNN architectures (2-layer vs. 3-layer) over 50 training epochs.
+
+## 🏗️ Model Architecture
+The core model is a flexible `MyCNN` class that dynamically adjusts based on the provided `layers_list`.
+
+### Key Components:
+* **Convolutional Blocks**: Each block contains a `Conv2d` layer (3x3 kernel), `ReLU` activation, and `MaxPool2d` (2x2).
+* **Dropout**: A 50% dropout rate is applied to the fully connected layer to mitigate overfitting.
+* **Dynamic Flattening**: The model automatically calculates the linear layer input size based on the number of pooling operations ($56 \times 56$ for 2 layers, $28 \times 28$ for 3 layers).
+
+## 🚀 Pipeline & Tasks
+
+### Task 5 & 6: Training and Curves
+* **Optimizer**: Adam ($LR=1e-3, Weight Decay=1e-4$).
+* **Loss Function**: Cross-Entropy Loss.
+* **Evaluation**: Tracks Training and Validation Loss/Accuracy to generate learning curves.
+
+### Task 7: Visual Predictions
+* Displays a grid of test images titled with **Ground Truth (GT)**, **Prediction (Pred)**, and the **Softmax Probability (P)**.
+
+### Task 8: Confusion Matrix
+* Generates a statistical heatmap using `sklearn` to identify which specific fracture classes are most frequently confused by the model.
+
+### Task 9: Model Comparison
+* Implements a second CNN with 3 convolutional layers.
+* Compares performance metrics between the two architectures to determine the effect of increased depth.
+
+## ⚙️ How to Use
+1. **Data**: Ensure the dataset is structured by class folder names.
+2. **Setup**: Define your `device` (CUDA or CPU) and run the `MyDataset` initialization.
+3. **Run**: Execute the training loop for 50 epochs. The "best" model weights will be saved as `Assignment1_best_model.pt`.
+4. **Evaluate**: Use the provided plotting functions to visualize results and the confusion matrix.
+
+## 📊 Results Summary
+* **Model 1 (2 Layers)**: Baseline performance on 10 fracture classes.
+* **Model 2 (3 Layers)**: Evaluation of deeper feature extraction efficiency.
