@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build outputs
+dist/
+build/
+*.o
+*.a
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+// This .gitignore configuration entry excludes environment variable files
+// containing local, sensitive configuration from version control.
+// The .env.local file typically stores local development secrets such as
+// API keys, database credentials, and other environment-specific settings
+// that should not be committed to the repository.
+.env.local
+
+# Data
+Dataset/
